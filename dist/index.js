@@ -11604,7 +11604,7 @@ const convertActionToCloneCommand = (cloneDir, action, cloneUrlBuilder) => {
   // Validate owner and repo
   if (!params.owner || !params.repo) throw new Error(`The action ${action} doesn't seem to contain a valid owner or repo`)
 
-  const defaultCommand = 'git clone --depth=1'
+  const defaultCommand = `rm -rf  ${cloneDir}/${params.repo} && git clone --depth=1`
   const branchCommand = params.ref ? `--single-branch --branch ${params.ref}` : ''
   const cloneUrl = cloneUrlBuilder(params)
   return `${defaultCommand} ${branchCommand} ${cloneUrl} ${cloneDir}/${params.repo}`
